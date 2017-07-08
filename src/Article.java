@@ -12,6 +12,7 @@ import java.util.Set;
 public class Article {
 
     private String id;
+    private String originalTitle;
     private Set<String> title;
     private Set<String> body;
 
@@ -21,8 +22,9 @@ public class Article {
      * @param title Article title
      * @param body  Article body
      */
-    public Article(String id, Set<String> title, Set<String> body) {
+    public Article(String id, String originalTitle, Set<String> title, Set<String> body) {
         this.id = id;
+        this.originalTitle = originalTitle;
         this.title = title;
         this.body = body;
     }
@@ -53,13 +55,8 @@ public class Article {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
 
-        for (String word: title) {
-            stringBuilder.append(word+" ");
-        }
-
-        return id + " -> " + stringBuilder.toString();
+        return id + "," + originalTitle;
     }
 
 

@@ -15,16 +15,19 @@ import java.util.*;
  */
 public class CSVFileReader {
 
+    /**
+     * Read a csv file with articles
+     * @param file The file containing articles
+     * @return Returns a Map that contains the articles
+     */
     public Map<String,Article> readCSV(String file) {
-        String line = "";
-        String csvSeparator = ",";
+        String line;
         Map<String,Article> articles = new Hashtable<>();
 
         try (BufferedReader bufferedReader = new BufferedReader( new FileReader(file))){
             while ((line = bufferedReader.readLine()) != null) {
-                String[] row = line.split(csvSeparator);
 
-                Article article = createArticle(row);
+                Article article = createArticle(line);
 
                 if(article != null)
                     articles.put(article.getId(),article);
@@ -42,16 +45,24 @@ public class CSVFileReader {
         return articles;
     }
 
-    private Article createArticle(String[] row) {
-        if (row.length < 3)
+    /**
+     * Auxiliary function to create article
+     * @param line Contains the line that contains article info
+     * @return Returns an Article
+     */
+    private Article createArticle(String line) {
+        String[] articleInArray = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)"); //Split CSV file with Quotes
+
+        if (articleInArray.length < 3)
             return null;
 
-        HashSet<String> title = new LinkedHashSet<>();
+        HashSet<String> title = new HashSet<>();
         HashSet<String> body = new HashSet<>();
 
-        String id = row[0];
-        String[] titleWords = row[1].replace("'","").split(" ");
-        String[] bodyWords = row[2].replace("'","").split(" "); //remove ' character
+        String id = articleInArray[0];
+        String orginalTitle = articleInArray[1];
+        String[] titleWords = articleInArray[1].replaceAll("[\\W_]"," ").split(" "); //Filter words
+        String[] bodyWords = articleInArray[2].replaceAll("[\\W_]"," ").split(" ");
 
         for (String word: titleWords) {
             title.add(word.toLowerCase());
@@ -61,6 +72,6 @@ public class CSVFileReader {
             body.add(word.toLowerCase());
         }
 
-        return new Article(id,title,body);
+        return new Article(id,orginalTitle,title,body);
     }
 }
