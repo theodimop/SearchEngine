@@ -1,15 +1,13 @@
-import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * ----------------------------------------------------------------------------  <br>
- * Article.java created byTheo Dimopoulos on 07-07-2017.                                <br>
+ * Article.java created byTheo Dimopoulos on 08-07-2017.                                <br>
  * Email:   dimopoulosth.td@gmail.com | td41@st-andrews.ac.uk                             <br>
  * ----------------------------------------------------------------------------  <br>
  *
  * @author Theo Dimopoulos
- * @version 07-07-2017
+ * @version 08-07-2017
  */
 public class Article {
 

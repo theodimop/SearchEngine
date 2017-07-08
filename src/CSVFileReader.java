@@ -1,16 +1,17 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
 /**
  * ----------------------------------------------------------------------------  <br>
- * ReadInput.java created byTheo Dimopoulos on 07-07-2017.                                <br>
+ * ReadInput.java created byTheo Dimopoulos on 08-07-2017.                                <br>
  * Email:   dimopoulosth.td@gmail.com | td41@st-andrews.ac.uk                             <br>
  * ----------------------------------------------------------------------------  <br>
  *
  * @author Theo Dimopoulos
- * @version 07-07-2017
+ * @version 08-07-2017
  */
 public class CSVFileReader {
 
@@ -30,7 +31,13 @@ public class CSVFileReader {
 
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            if(e instanceof FileNotFoundException)
+                System.out.println("No csv file found with this name.");
+            else
+                e.printStackTrace();
+
+            System.out.println("Program exits...");
+            System.exit(0);
         }
         return articles;
     }
